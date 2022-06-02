@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Card, CardBody, CardFooter, CardHeader } from 'reactstrap';
 import React from 'react';
+import moment from 'moment';
 
 const DayForecast = ({ day }) => {
   const pictures = [];
@@ -15,11 +16,11 @@ const DayForecast = ({ day }) => {
   return (
     <Card className='my-3 d-flex flex-column bd-highlight mb-3 border card-3d'>
       <CardHeader className='p-2 d-flex justify-content-between align-items-center"'>
-        <span>{day.date}</span>
+        <span>{moment(day.date).format('LL')}</span>
         <div>
-          <span>{day.TemperatureMin} °C</span>
+          <span>{day.temperatureMin} °C</span>
           {' - '}
-          <span>{day.TemperatureMax} °C</span>
+          <span>{day.temperatureMax} °C</span>
         </div>
       </CardHeader>
       <CardBody className="p-1 d-flex justify-content-center">

@@ -9,7 +9,7 @@ const Home = () => {
   const [searchPhrase, setsearchPhrase] = useState();
   const [locations, setLocations] = useState([
     { value: "53286", label: "Vancouver - Canada" },
-    { value: "0", label: "Test - Canada" }
+    { value: "623", label: "Paris - France" }
   ]);
   const [days, setDays] = useState('1');
   const [selectedLocation, setSelectedLocation] = useState();
@@ -19,8 +19,8 @@ const Home = () => {
     
     { 
       date: moment().add(1, 'day').format("LL"),
-      TemperatureMin: 11,
-      TemperatureMax: 19,
+      temperatureMin: 11,
+      temperatureMax: 19,
       isCloudy: true,
       isSunny: false,
       isRainy: false,
@@ -29,8 +29,8 @@ const Home = () => {
     },
     {
       date: moment().add(2, 'day').format("LL"),
-      TemperatureMin: 10,
-      TemperatureMax: 17,
+      temperatureMin: 10,
+      temperatureMax: 17,
       isCloudy: true,
       isSunny: false,
       isRainy: true,
@@ -39,8 +39,8 @@ const Home = () => {
     },
     {
       date: moment().add(3, 'days').format("LL"),
-      TemperatureMin: 13,
-      TemperatureMax: 21,
+      temperatureMin: 13,
+      temperatureMax: 21,
       isCloudy: true,
       isSunny: true,
       isRainy: true,
@@ -49,8 +49,8 @@ const Home = () => {
     },
     {
       date: moment().add(4, 'days').format("LL"),
-      TemperatureMin: 12,
-      TemperatureMax: 22,
+      temperatureMin: 12,
+      temperatureMax: 22,
       isCloudy: false,
       isSunny: true,
       isRainy: true,
@@ -59,8 +59,8 @@ const Home = () => {
     },
     {
       date: moment().add(5, 'days').format("LL"),
-      TemperatureMin: 12,
-      TemperatureMax: 18,
+      temperatureMin: 12,
+      temperatureMax: 18,
       isCloudy: true,
       isSunny: false,
       isRainy: false,
@@ -103,14 +103,15 @@ const Home = () => {
     return Object.keys(data).map((key) => ({ value: key, label: data[key] }));
   }
 
-  const loadWeatherForecastData = async (value) => {
-    if(value === selectedLocation) return;
-    const response = await fetch(`api/weatherforecast/${selectedLocation}/${days}`);
-    const data = await response.json();
-    setSelectedLocation(value);
-    setDaysData(data);
-    if (!data.length) setErrorMessage("No weather forecast data received");
-  }
+  useEffect(() =>{
+    fetch(`api/weatherforecast/${selectedLocation}/${days}`)    
+      .then(response => response.json())
+      .then((data) => {
+        if (!data.length) setErrorMessage("No weather forecast data received");
+        else setDaysData(data);
+      })
+      .catch(error => setErrorMessage(error));
+  },[selectedLocation, days]);
 
   return (
     <>
@@ -120,7 +121,8 @@ const Home = () => {
       <Col md="6">
         <AsyncSelect
           loadOptions={loadMoreLocations}
-          onChange={({ value }) => loadWeatherForecastData(value)}
+          defaultValue={locations[0]}
+          onChange={({ value }) => setSelectedLocation(value)}
           placeholder="Select or start typing"
           options={locations}
           defaultOptions={locations}
