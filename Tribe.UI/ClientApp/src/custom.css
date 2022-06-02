@@ -12,3 +12,31 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+img {
+  width: 100px;
+}
+
+.card-footer {
+  min-height: 60px;
+  font-size: smaller;
+}
+
+.card-3d {
+  box-shadow:
+    0 0 1px 0 rgba(0, 0, 0, 0.22),
+    0 1px 2px 0 rgba(0, 0, 0, 0.12),
+    0 1px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.card-3d:hover{
+  box-shadow:
+    0 1px 1px 1px rgba(50,120,175,.14),
+    0 2px 1px 0px rgba(50,120,175,.12),
+    0 1px 3px 2px rgba(50,120,175,.2);
+}
+
+.card-header > div,
+.card-header > span {
+  font-size: smaller;
+}

@@ -14,7 +14,8 @@ namespace TribeWeather.Common.Dto
         public float CloudCover { get; set; }
         public string Summary { get; set; } = string.Empty;
 
-        public bool IsSunny => HoursOfSun > 0 && CloudCover < 50;
+        public bool IsCloudy => CloudCover > 60;
+        public bool IsSunny => HoursOfSun > 4;
         public bool IsSnowy => SnowProbability > 50;
         public bool IsRainy => RainProbability > 50;
     }
