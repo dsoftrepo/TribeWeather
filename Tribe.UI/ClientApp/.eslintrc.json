@@ -1,0 +1,63 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  "extends": ["plugin:react/recommended", "eslint:recommended"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false,
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+   },
+    "sourceType": "module",
+    "ecmaVersion": 9,
+    "ecmaFeatures": {
+      "jsx": true,
+      "arrowFunctions": true,
+      "blockBindings": true,
+      "defaultParams": true,
+      "destructuring": true,
+      "forOf": true,
+      "generators": true,
+      "objectLiteralComputedProperties": true,
+      "objectLiteralShorthandMethods": true,
+      "objectLiteralShorthandProperties": true,
+      "experimentalObjectRestSpread": true,
+      "restParams": true,
+      "spread": true,
+      "templateStrings": true,
+      "modules": true,
+      "classes": true
+    }
+  },
+  "plugins": ["react", "react-hooks"],
+  "rules": {
+    "react/destructuring-assignment": [0],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/forbid-prop-types": [1, { "forbid": [], "checkContextTypes": true, "checkChildContextTypes": true }],
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "max-len": ["error", { "code": 320, "ignoreUrls": true }],
+    "import/no-extraneous-dependencies": 0,
+    "import/no-cycle": 0,
+    "comma-dangle": 0,
+    "no-underscore-dangle": 0,
+    "object-curly-newline": 0,
+    "linebreak-style": 0,
+    "react/function-component-definition": [1, {"namedComponents": "arrow-function", "unnamedComponents": "function-expression"}]
+  }
+}
